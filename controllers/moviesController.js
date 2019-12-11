@@ -18,9 +18,22 @@ exports.index = (req, res, next) => {
 		if (director && !movie.director.match(director.trim())) {
 			return false;
 		}
-		
+
 		return true;
 	});
 
 	res.send(results);
+}
+
+exports.show = (req, res, next) => {
+
+	const { movieId } = req.params;
+	const movie = movies.find(movie => movie.id.toString() === movieId.toString());
+	if (movie) {
+		res.send(movie);
+	} else {
+		res.status(404);
+		res.send("Movie not found");
+	}
+
 }
