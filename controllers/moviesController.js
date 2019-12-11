@@ -25,17 +25,20 @@ exports.index = (req, res, next) => {
 	res.send(results);
 }
 
-exports.show = (req, res, next) => {
-
+exports.load = (req, res, next) => {
 	const { movieId } = req.params;
 	const movie = movies.find(movie => movie.id.toString() === movieId.toString());
 	if (movie) {
-		res.send(movie);
+		req.movie = movie;
+		next();
 	} else {
 		res.status(404);
 		res.send("Movie not found");
 	}
+}
 
+exports.show = (req, res, next) => {
+	res.send(req.movie);
 }
 
 exports.create = (req, res, next) => {
@@ -45,4 +48,14 @@ exports.create = (req, res, next) => {
 	movies.push(movie);
 	res.send(movie);
 
+} 
+
+exports.edit = (req, res, next) => {
+	const props = ["title", "year", "runtime", "genres", "director", "actors", "plot", "posterUrl"];
+	for (let prop of props) {
+		if (req.body[prop] !== undefined) {
+			req.movie[prop] = req.body[prop];
+		}
+	}
+	res.send(req.movie);
 } 
