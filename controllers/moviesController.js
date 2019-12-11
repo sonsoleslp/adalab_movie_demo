@@ -1,9 +1,21 @@
 var { movies } = require("../models");
 
 exports.index = (req, res, next) => {
-	const { genre } = req.query;
+	const { genre, yearBefore, yearAfter } = req.query;
 	let results = movies.filter(movie => {
-		return genre ? movie.genres.indexOf(genre) !== -1 : true;
+		if (genre && movie.genres.indexOf(genre) === -1) {
+			return false;
+		} 
+
+		if (yearBefore && movie.year >= yearBefore) {
+			return false;
+		}
+
+		if (yearAfter && movie.year <= yearAfter) {
+			return false;
+		}
+
+		return true;
 	});
 
 	res.send(results);
