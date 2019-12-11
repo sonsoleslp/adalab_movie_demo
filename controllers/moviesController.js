@@ -59,3 +59,15 @@ exports.edit = (req, res, next) => {
 	}
 	res.send(req.movie);
 } 
+
+exports.destroy = (req, res, next) => {
+	const { movieId } = req.params;
+	const movieIndex = movies.findIndex(movie => movie.id.toString() === movieId.toString());
+	if (movieIndex !== -1) {
+		movies.splice(movieIndex, 1);
+		res.send("Movie deleted successfully");
+	} else {
+		res.status(404);
+		res.send("Movie not found");
+	}
+}
