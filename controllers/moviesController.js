@@ -1,7 +1,7 @@
 var { movies } = require("../models");
 
 exports.index = (req, res, next) => {
-	const { genre, yearBefore, yearAfter } = req.query;
+	const { genre, yearBefore, yearAfter, director } = req.query;
 	let results = movies.filter(movie => {
 		if (genre && movie.genres.indexOf(genre) === -1) {
 			return false;
@@ -15,6 +15,10 @@ exports.index = (req, res, next) => {
 			return false;
 		}
 
+		if (director && !movie.director.match(director.trim())) {
+			return false;
+		}
+		
 		return true;
 	});
 
