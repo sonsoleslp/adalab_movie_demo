@@ -37,3 +37,12 @@ exports.show = (req, res, next) => {
 	}
 
 }
+
+exports.create = (req, res, next) => {
+	const id = movies.length > 0 ? (movies[movies.length - 1].id + 1) : 1;
+	const {title, year, runtume, genres, director, actors, plot, posterUrl} = req.body;
+	const movie = {id, title, year, runtume, genres, director, actors, plot, posterUrl};
+	movies.push(movie);
+	res.send(movie);
+
+} 
