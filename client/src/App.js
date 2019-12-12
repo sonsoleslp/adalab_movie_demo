@@ -21,7 +21,7 @@ export default class App extends React.Component {
     const {movies, err, selectedMovie} = this.state;
     return (<div>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Movie Database</Navbar.Brand>
+        <Navbar.Brand href="#home">Movie Database API</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -35,7 +35,7 @@ export default class App extends React.Component {
           </Form>
         </Navbar.Collapse>
       </Navbar>
-      <Container fluid>
+      <Container fluid id="mainContainer">
       <Row>
         {(!err && movies && movies.length > 0) ? (movies.map((movie, selectedMovie)=><Movie key={movie.id} {...movie} onClick={()=>{this.setState({selectedMovie})}} />)) : null }
         {(!err && movies && movies.length === 0) ? (<img src={process.env.PUBLIC_URL + "/spinner.svg"} alt="spinner" className="spinner"/>) : null }
@@ -63,7 +63,7 @@ export default class App extends React.Component {
     }
 
     try {
-      const movies = await (await fetch(URL+query)).json();
+      const movies = await (await fetch(encodeURI(URL+query))).json();
       this.setState({movies, err: (movies && movies.length > 0)? undefined : "No results"});
     } catch(err) {
       this.setState({err: "Error when retrieving movies from server"});
