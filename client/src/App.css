@@ -1,0 +1,20 @@
+.poster {
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+}
+
+.spinner {
+  margin: auto;
+}
+
+.error {
+	color: var(--danger);
+	text-align: center;
+	margin:auto;
+	font-size: 3em;
+	vertical-align: bottom;
+	height: 30vh;
+}
