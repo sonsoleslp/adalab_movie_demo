@@ -1,5 +1,8 @@
 ![Adalab](https://github.com/Adalab/Adalab-web-starter-kit/raw/master/_src/assets/images/logo-adalab-80px.png)
+
 # Adalab Movie Demo
+[Link a la presentación](https://docs.google.com/presentation/d/1vjJt4BtSzgvmZ86K8zAAbsC36Sjkc-m6rjiI7kP9PvY/edit?usp=sharing)
+
 **Objetivo**: Desarrollar una API para acceder  a una base de datos de películas
 **Funcionalidades**:
 
